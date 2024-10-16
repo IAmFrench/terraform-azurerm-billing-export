@@ -10,7 +10,7 @@ authors:
     family-names: PARÈS
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.13942774
+    value: 10.5281/zenodo.13942773
 repository-code: >-
   https://github.com/IAmFrench/terraform-azurerm-billing-export
 repository-artifact: >-
