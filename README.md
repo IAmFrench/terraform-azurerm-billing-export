@@ -264,7 +264,7 @@ If there is many months, there will be many backfill request made. As the `azapi
 
 Check if your subscription type is supported here: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports#understand-data-types
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -332,4 +332,4 @@ Check if your subscription type is supported here: https://learn.microsoft.com/e
 | <a name="output_backfill_job_id"></a> [backfill\_job\_id](#output\_backfill\_job\_id) | List of Ids of backfill jobs.<br><br>E.g.:<pre>[<br>  "/providers/Microsoft.Billing/billingAccounts/123456789/providers/Microsoft.CostManagement/exports/focus-export-for-billing-account-123456789/Run/e8102b07-9d1e-4185-95fe-fe60d8d6ad5a",<br>  "/providers/Microsoft.Billing/billingAccounts/123456789/providers/Microsoft.CostManagement/exports/focus-export-for-billing-account-123456789/Run/1089e775-8098-4d50-ae69-c22fd26ae7ef"<br>]</pre> |
 | <a name="output_export_id"></a> [export\_id](#output\_export\_id) | Id of the export.<br><br>E.g.: `/providers/Microsoft.Billing/billingAccounts/123456789/providers/Microsoft.CostManagement/exports/focus-export-for-billing-account-123456789` |
 | <a name="output_months_to_backfill"></a> [months\_to\_backfill](#output\_months\_to\_backfill) | List of months to backfill.<br><br>E.g.:<pre>[<br>  {<br>    start = "2023-01-01T00:00:00Z"<br>    end = "2023-01-31T00:00:00Z"<br>  },<br>  {<br>    start = "2023-02-01T00:00:00Z"<br>    end = "2023-02-28T00:00:00Z"<br>  }<br>]</pre> |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
