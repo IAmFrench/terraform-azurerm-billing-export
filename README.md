@@ -26,7 +26,7 @@ Detailed examples are available under the [`./examples`](./examples/) directory.
 module "azurerm_billing_export" {
   source = "IAmFrench/billing-export/azurerm"
 
-  version = "1.0.0"
+  version = "1.0.1"
 
   create_resource_group   = true
   resource_group_name     = "rg-focus-export-001"
@@ -69,7 +69,7 @@ module "azurerm_billing_export" {
 module "azurerm_billing_export" {
   source = "IAmFrench/billing-export/azurerm"
 
-  version = "1.0.0"
+  version = "1.0.1"
 
   create_resource_group   = false
   resource_group_name     = "rg-focus-export-001"
@@ -112,7 +112,7 @@ module "azurerm_billing_export" {
 module "azurerm_billing_export" {
   source = "IAmFrench/billing-export/azurerm"
 
-  version = "1.0.0"
+  version = "1.0.1"
 
   create_resource_group   = false
   resource_group_name     = "rg-focus-export-001"
@@ -270,7 +270,7 @@ Check if your subscription type is supported here: https://learn.microsoft.com/e
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
-| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | 2.0.0-beta |
+| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | 2.0.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.113.0 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | 0.12.1 |
 
@@ -278,7 +278,7 @@ Check if your subscription type is supported here: https://learn.microsoft.com/e
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 2.0.0-beta |
+| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 2.0.1 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.113.0 |
 | <a name="provider_time"></a> [time](#provider\_time) | 0.12.1 |
 
@@ -293,7 +293,7 @@ Check if your subscription type is supported here: https://learn.microsoft.com/e
 
 | Name | Type |
 |------|------|
-| [azapi_resource.focus_export](https://registry.terraform.io/providers/azure/azapi/2.0.0-beta/docs/resources/resource) | resource |
+| [azapi_resource.focus_export](https://registry.terraform.io/providers/azure/azapi/2.0.1/docs/resources/resource) | resource |
 | [azurerm_resource_group.main](https://registry.terraform.io/providers/hashicorp/azurerm/3.113.0/docs/resources/resource_group) | resource |
 | [azurerm_storage_account.export](https://registry.terraform.io/providers/hashicorp/azurerm/3.113.0/docs/resources/storage_account) | resource |
 | [azurerm_storage_container.focus](https://registry.terraform.io/providers/hashicorp/azurerm/3.113.0/docs/resources/storage_container) | resource |
