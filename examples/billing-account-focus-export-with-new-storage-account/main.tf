@@ -8,22 +8,15 @@ locals {
   export_start_date  = "2023-01-01"
 }
 
-provider "azapi" {
-
-}
-
 provider "azurerm" {
   features {}
 }
 
-resource "random_id" "resource_group" {
-  prefix      = "rg-focus-export-"
-  byte_length = 3
-}
+module "naming" {
+  source  = "Azure/naming/azurerm"
+  version = "0.4.1"
 
-resource "random_id" "storage_account" {
-  prefix      = "billingexport"
-  byte_length = 3
+  suffix = ["finops"]
 }
 
 /* -------------------------- FOCUS Billing export -------------------------- */
@@ -31,17 +24,17 @@ module "azurerm_billing_export" {
   source = "../.."
 
   create_resource_group   = true
-  resource_group_name     = random_id.resource_group.dec
+  resource_group_name     = module.naming.resource_group.name_unique
   resource_group_location = "Switzerland North"
 
   create_storage_account = true
-  storage_account_name   = random_id.storage_account.dec
+  storage_account_name   = module.naming.storage_account.name_unique
 
   create_storage_container = true
   storage_container_name   = "focus"
 
   export_type    = "FOCUS"
-  export_version = "1.0"
+  export_version = "1.0r2"
 
   export_scope_and_id = {
     scope = "billing-account"

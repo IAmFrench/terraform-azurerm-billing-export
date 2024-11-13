@@ -11,28 +11,22 @@ This example will create:
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
-| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | 2.0.0-beta |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.113.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.6.3 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
+No providers.
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_azurerm_billing_export"></a> [azurerm\_billing\_export](#module\_azurerm\_billing\_export) | ../.. | n/a |
+| <a name="module_naming"></a> [naming](#module\_naming) | Azure/naming/azurerm | 0.4.1 |
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [random_id.resource_group](https://registry.terraform.io/providers/hashicorp/random/3.6.3/docs/resources/id) | resource |
-| [random_id.storage_account](https://registry.terraform.io/providers/hashicorp/random/3.6.3/docs/resources/id) | resource |
+No resources.
 
 ## Inputs
 

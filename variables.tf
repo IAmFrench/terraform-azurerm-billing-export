@@ -167,11 +167,11 @@ variable "export_version" {
   Version of the billing export. Should be use with `export_type`.
   
   Valid values are:
-  - `1.0` for `FOCUS`
+  - `1.0r2` & `1.0` for `FOCUS`
   - `2023-12-01-preview` for Cost and usage details (EA, MCA, MPA and CSP)
   - `2019-11-01` for Cost and usage details (MOSA)
   
-  E.g.: `1.0`, `2023-12-01-preview`, `2019-11-01`
+  E.g.: `1.0r2`, `1.0`, `2023-12-01-preview`, `2019-11-01`
   EOT
 
   type     = string
@@ -183,6 +183,7 @@ variable "export_version" {
       # - Enterprise Agreement (EA)
       # - Microsoft Customer Agreement (MCA)
       "1.0",
+      "1.0r2",
 
       # Cost and usage details for
       # - Enterprise Agreement (EA)
