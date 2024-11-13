@@ -39,7 +39,7 @@ module "azurerm_billing_export" {
   storage_container_name   = "focus"
 
   export_type    = "FOCUS"
-  export_version = "1.0"
+  export_version = "1.0r2"
 
   export_scope_and_id = {
     scope = "billing-account"
@@ -82,7 +82,7 @@ module "azurerm_billing_export" {
   storage_container_name   = "focus"
 
   export_type    = "FOCUS"
-  export_version = "1.0"
+  export_version = "1.0r2"
 
   export_scope_and_id = {
     scope = "billing-account"
@@ -125,7 +125,7 @@ module "azurerm_billing_export" {
   storage_container_name   = "focus"
 
   export_type    = "FOCUS"
-  export_version = "1.0"
+  export_version = "1.0r2"
 
   export_scope_and_id = {
     scope = "subscription"
@@ -150,7 +150,7 @@ module "azurerm_billing_export" {
 
 ## Roadmap & Features
 
-- [X] FOCUS `1.0` export ([Improved export experience](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports))
+- [X] FOCUS `1.0` & `1.0r2` export ([Improved export experience](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports))
 - [X] Subscription export (`export_scope_and_id` = `subscription`)
 - [X] Billing Account export (`export_scope_and_id` = `billing-account`)
 - [X] Automatic backfill from `export_start_date` to current date (`export_creation_date`)

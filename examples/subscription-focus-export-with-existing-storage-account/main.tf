@@ -29,7 +29,7 @@ module "azurerm_billing_export" {
   storage_container_name   = "focus"
 
   export_type       = "FOCUS"
-  export_version    = "1.0"
+  export_version    = "1.0r2"
   export_start_date = "2024-01-01"
 
   export_scope_and_id = {
