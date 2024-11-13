@@ -11,10 +11,6 @@ locals {
   subscription_id = data.azurerm_subscription.current.subscription_id
 }
 
-provider "azapi" {
-
-}
-
 provider "azurerm" {
   features {}
 }
