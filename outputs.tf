@@ -43,5 +43,5 @@ output "backfill_job_id" {
   ```
   EOT
 
-  value = module.backfill_job[*].backfill_job_id
+  value = azapi_resource_action.backfill_job[*].id
 }

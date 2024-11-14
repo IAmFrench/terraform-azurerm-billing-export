@@ -26,7 +26,7 @@ Detailed examples are available under the [`./examples`](./examples/) directory.
 module "azurerm_billing_export" {
   source = "IAmFrench/billing-export/azurerm"
 
-  version = "1.0.1"
+  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
 
   create_resource_group   = true
   resource_group_name     = "rg-focus-export-001"
@@ -69,7 +69,7 @@ module "azurerm_billing_export" {
 module "azurerm_billing_export" {
   source = "IAmFrench/billing-export/azurerm"
 
-  version = "1.0.1"
+  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
 
   create_resource_group   = false
   resource_group_name     = "rg-focus-export-001"
@@ -112,7 +112,7 @@ module "azurerm_billing_export" {
 module "azurerm_billing_export" {
   source = "IAmFrench/billing-export/azurerm"
 
-  version = "1.0.1"
+  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
 
   create_resource_group   = false
   resource_group_name     = "rg-focus-export-001"
@@ -147,85 +147,19 @@ module "azurerm_billing_export" {
 </details>
 
 
-
 ## Roadmap & Features
 
 - [X] FOCUS `1.0` & `1.0r2` export ([Improved export experience](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports))
 - [X] Subscription export (`export_scope_and_id` = `subscription`)
 - [X] Billing Account export (`export_scope_and_id` = `billing-account`)
-- [X] Automatic backfill from `export_start_date` to current date (`export_creation_date`)
+- [X] Automatic backfill from `export_start_date` to export's creation date (`export_creation_date`)
+- [X] Retry implementation (if we hit the rate limit `429 Too Many Requests`)
 
 ## Limitations
 
 - Id of backfill jobs is not returned by the [microsoft API](https://learn.microsoft.com/en-us/rest/api/cost-management/exports/execute) on job submission, therefore returned id is incorrect
-- Hit rate limit (`429 Too Many Requests`) as `azapi` Terraform Provider [doesn't handle correctly API rate limit by implementing graceful backoff/retry](https://developer.hashicorp.com/terraform/internals/graph#walking-the-graph), a dirty hack of `time_sleep` has been implemented for backfill jobs
 
 ## Common errors
-
-### 429 Tool Many Requests
-
-<details>
-
-<summary>429 Too Many Requests</summary>
-
-```bash
-╷
-│ Error: Failed to perform action
-│ 
-│   with module.azurerm_billing_export.azapi_resource_action.start["24"],
-│   on ../../main.tf line 181, in resource "azapi_resource_action" "start":
-│  181: resource "azapi_resource_action" "start" {
-│ 
-│ performing action run of "Resource: (ResourceId
-│ \"/subscriptions/xxxx-xxxx-xxxx-xxxx/providers/Microsoft.CostManagement/exports/focus-export-for-subscription-xxxx-xxxx-xxxx-xxxx\"
-│ / Api Version \"2023-07-01-preview\")": POST
-│ https://management.azure.com/subscriptions/xxxx-xxxx-xxxx-xxxx/providers/Microsoft.CostManagement/exports/focus-export-for-subscription-xxxx-xxxx-xxxx-xxxx/run
-│ --------------------------------------------------------------------------------
-│ RESPONSE 429: 429 Too Many Requests
-│ ERROR CODE: 429
-│ --------------------------------------------------------------------------------
-│ {
-│   "error": {
-│     "code": "429",
-│     "message": "Too many requests. Please retry after 60 seconds."
-│   }
-│ }
-│ --------------------------------------------------------------------------------
-│ 
-╵
-```
-
-```bash
-╷
-│ Error: Failed to perform action
-│
-│   with module.azurerm_billing_export.module.backfill_job[5].azapi_resource_action.backfill_job,
-│   on ../../modules/backfill_job/main.tf line 12, in resource "azapi_resource_action" "backfill_job":
-│   12: resource "azapi_resource_action" "backfill_job" {
-│
-│ performing action run of "Resource: (ResourceId
-│ \"/providers/Microsoft.Billing/billingAccounts/123456789/providers/Microsoft.CostManagement/exports/focus-export-for-billing-account-123456789\"
-│ / Api Version \"2023-07-01-preview\")": POST
-│ https://management.azure.com/providers/Microsoft.Billing/billingAccounts/123456789/providers/Microsoft.CostManagement/exports/focus-export-for-billing-account-123456789/run
-│ --------------------------------------------------------------------------------
-│ RESPONSE 429: 429 Too Many Requests
-│ ERROR CODE: 429
-│ --------------------------------------------------------------------------------
-│ {
-│   "error": {
-│     "code": "429",
-│     "message": "Too many requests. Please retry after 60 seconds."
-│   }
-│ }
-│ --------------------------------------------------------------------------------
-│
-╵
-```
-</details>
-
-This error happens when the export start date is old. Therefore this module will do a backfill for each month between the export start date and the current date.
-If there is many months, there will be many backfill request made. As the `azapi` terraform provider doesn't implement graceful backoff/retry you will need to wait a couple of minutes and start again.
-
 
 ### FocusCost is not supported
 
@@ -286,7 +220,6 @@ Check if your subscription type is supported here: https://learn.microsoft.com/e
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_backfill_job"></a> [backfill\_job](#module\_backfill\_job) | ./modules/backfill_job | n/a |
 | <a name="module_months_to_backfill"></a> [months\_to\_backfill](#module\_months\_to\_backfill) | ./modules/months_to_backfill | n/a |
 
 ## Resources
@@ -294,6 +227,7 @@ Check if your subscription type is supported here: https://learn.microsoft.com/e
 | Name | Type |
 |------|------|
 | [azapi_resource.focus_export](https://registry.terraform.io/providers/azure/azapi/latest/docs/resources/resource) | resource |
+| [azapi_resource_action.backfill_job](https://registry.terraform.io/providers/azure/azapi/latest/docs/resources/resource_action) | resource |
 | [azurerm_resource_group.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_storage_account.export](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_container.focus](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |

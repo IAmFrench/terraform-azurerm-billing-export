@@ -150,17 +150,30 @@ module "months_to_backfill" {
   export_end_date = var.export_end_date
 }
 
-module "backfill_job" {
-  source = "./modules/backfill_job"
-
+/* ------------------------------ Backfill job ------------------------------ */
+resource "azapi_resource_action" "backfill_job" {
   # Create backfill jobs only if `var.enable_backfill` is `true` and `var.export_type` is `FOCUS`
   count = var.enable_backfill && var.export_type == "FOCUS" ? length(module.months_to_backfill[0].months_to_backfill) : 0
 
-  # Id of the export
-  export_id = azapi_resource.focus_export[0].id
+  type                   = "Microsoft.CostManagement/exports@2023-07-01-preview"
+  resource_id            = azapi_resource.focus_export[0].id
+  action                 = "run"
+  response_export_values = ["*"]
+  body = {
+    timePeriod = {
+      from = module.months_to_backfill[0].months_to_backfill[count.index].start_date
+      to   = module.months_to_backfill[0].months_to_backfill[count.index].end_date
+    }
+  }
+  locks = ["${azapi_resource.focus_export[0].id}/run"]
 
-  # Start date of the backfill
-  backfill_start_date = module.months_to_backfill[0].months_to_backfill[count.index].start_date
-  # End date of the backfill
-  backfill_end_date = module.months_to_backfill[0].months_to_backfill[count.index].end_date
+  retry = {
+    error_message_regex = [
+      "Too many requests"
+    ]
+  }
+
+  timeouts {
+    read = "10m"
+  }
 }
